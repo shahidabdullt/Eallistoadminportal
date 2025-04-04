@@ -23,7 +23,7 @@ class AuthController extends Controller
         ]);
        
         if (Auth::attempt($credentials)) {
-            // $request->session()->regenerate(); 
+             $request->session()->regenerate(); 
             $user = Auth::user();
             
             if ($user->isadmin=="1") {

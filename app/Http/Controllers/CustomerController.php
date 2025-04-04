@@ -16,7 +16,7 @@ class CustomerController extends Controller
             return view('customerslists',['users'=>$users]);
         }
         else if($type=='invoice'){
-            $invoices=Invoice::all();
+            $invoices=Invoice::all(); 
         
             return view('invoiceslists',['invoices'=>$invoices]);
         }
@@ -53,7 +53,7 @@ class CustomerController extends Controller
                 return redirect()->route('customersinvoices', ['type' => 'customer']);
 
         }
-       elseif($type='invoice'){
+       elseif($type=='invoice'){
         $validatedinvoice=$request->validate([ 
             'user_id' => 'required|exists:users,id',
             'date'=>'nullable|date',
@@ -129,13 +129,7 @@ class CustomerController extends Controller
     ]);
 
     
-    $user = User::find($validated['useridinvoice']);
-    if ($user) {
-        $user->username = $validated['username'];
-        $user->save();
-    } else {
-        return response()->json(['error' => 'User not found'], 404);
-    }
+ 
        
     return response()->json(['message' => 'Invoice updated successfully']);
     }

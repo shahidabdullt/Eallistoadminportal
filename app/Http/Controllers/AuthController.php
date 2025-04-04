@@ -23,24 +23,24 @@ class AuthController extends Controller
         ]);
        
         if (Auth::attempt($credentials)) {
+            // $request->session()->regenerate(); 
             $user = Auth::user();
-            //  dd($user->isadmin);
-            // $token = $user->createToken('MyApp')->accessToken;
+            
             if ($user->isadmin=="1") {
-                // $token = $user->createToken('AdminApp')->accessToken;
-                // $request->session()->put('token', $token);
+           
                 return redirect('/admin/dashboardpage');
             } else {
-                $token = $user->createToken('UserApp')->accessToken;
-                $request->session()->put('token', $token);
-                return redirect('/dashboardpage')->with('token', $token);
+               
+                return redirect('/dashboardpage');
             }
            
         }
 
        
 
-        return back()->withErrors(['Username' => 'Invalid Credentials'])->withInput();
+        return back()->withErrors([
+            'Username' => 'Invalid credentials',
+        ])->withInput($request->except('password'));
     }
 
     public function logout(Request $request){

@@ -119,6 +119,10 @@
             @endforelse
         </div>
 
+        <div class="pagination mt-3">
+            {{ $invoices->links() }}
+        </div>
+
         <a href="{{ route('customerscreation', ['type' => 'invoice']) }}" class="create-invoice">Create Invoice</a>
 
         <div id="edit-invoices">
@@ -128,7 +132,7 @@
                 <input type="hidden" name="useridinvoice" id="userIdinvoice">
                 
                 <label for="username">Name</label>
-                <input type="text" id="username" name="username" value="{{ old('username') }}">
+                <input type="text" id="username" name="username" value="{{ old('username') }}" readonly>
 
                 <label for="date">Date</label>
                 <input id="date" type="date" name="date" value="{{ old('date') }}">

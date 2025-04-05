@@ -5,8 +5,8 @@ This is a Laravel 12-based admin portal built as an assignment project for **Eal
 ## Features
 
 - Admin login and authentication
-- Customer management (Create, List)
-- Invoice management (Create, List)
+- Customer management (Create, List,Edit)
+- Invoice management (Create, List,Edit)
 - Unified API endpoint for both Customers and Invoices
 
 ## Requirements

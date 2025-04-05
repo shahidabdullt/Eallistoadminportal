@@ -119,9 +119,7 @@
             @endforelse
         </div>
 
-        <div class="pagination mt-3">
-            {{ $invoices->links() }}
-        </div>
+        
 
         <a href="{{ route('customerscreation', ['type' => 'invoice']) }}" class="create-invoice">Create Invoice</a>
 

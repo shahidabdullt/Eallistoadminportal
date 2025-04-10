@@ -12,9 +12,13 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        // $middleware->alias([
-        //     'prevet-back-history'=>PreventBackHistory::class,
-        // ]);
+        $middleware->alias([
+            'adminmiddleware' => \App\Http\Middleware\AdminMiddleware::class,
+            // 'prevent-back-history' => \App\Http\Middleware\PreventBackHistory::class,
+            $middleware->append(PreventBackHistory::class),
+            
+            // Add other aliases if needed
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //

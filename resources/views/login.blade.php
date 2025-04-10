@@ -16,7 +16,7 @@
                 <input type="text" id="mobile" name="mobile" hidden>
                 <label for="login" class="form-label">Username</label>
                 <input type="text" class="form-control @error('Username') is-invalid
-                @enderror" id="login" name="Username">
+                @enderror" id="login" name="Username" value="{{ old('Username') }}">
                 @error('Username')
                 <div class="invalid-feedback">
                     {{ $message }}
@@ -33,7 +33,11 @@
                 </div>
                 @enderror
             </div>
-            
+           @if ($errors->any())
+           <div class="alert alert-danger">
+            {{ $errors->first() }}
+           </div>
+           @endif
             <button type="submit" class="btn btn-primary w-100">Login</button>
         </form>
 

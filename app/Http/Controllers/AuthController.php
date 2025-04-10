@@ -16,22 +16,22 @@ class AuthController extends Controller
 
     public function Authentication(Request $request)
     {
-          
+         
         $credentials = $request->validate([
             'Username' => 'required',
             'password' => 'required',
         ]);
-       
+        
         if (Auth::attempt($credentials)) {
              $request->session()->regenerate(); 
             $user = Auth::user();
             
             if ($user->isadmin=="1") {
-           
+                
                 return redirect('/admin/dashboardpage');
             } else {
                
-                return redirect('/dashboardpage');
+                return redirect('/login')->withErrors('you do not have admin access');
             }
            
         }
@@ -51,11 +51,15 @@ class AuthController extends Controller
     
         // Regenerate CSRF token to avoid session fixation
         $request->session()->regenerateToken();
-    
+        $response = redirect('/login');
+        $response->headers->set('Cache-Control', 'no-store, no-cache, must-revalidate, max-age=0');
+        $response->headers->set('Pragma', 'no-cache');
+        $response->headers->set('Expires', 'Sun, 02 Jan 1990 00:00:00 GMT');
+        return $response;
         // Redirect to the login page with a logout message
-        return redirect('/login')->with('message', 'You have been logged out successfully.');
+        // return redirect('/login')->with('message', 'You have been logged out successfully.');
     }
-    public function admindashboard(){
+    public function admindashboard(){ 
         return view('admin.adminportal');
     }
 }

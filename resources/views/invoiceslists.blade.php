@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="{{ asset('css/customer.css') }}">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="{{ asset('js/customer.js') }}"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <style>
         body {
@@ -118,7 +120,7 @@
                 <p>No invoices found</p>
             @endforelse
         </div>
-
+        {{ $invoices->links() }}
         
 
         <a href="{{ route('customerscreation', ['type' => 'invoice']) }}" class="create-invoice">Create Invoice</a>
@@ -127,7 +129,7 @@
             <form id="edit-invoices-form">
                 @csrf
                 <input type="hidden" name="id" id="invoiceId">
-                <input type="hidden" name="useridinvoice" id="userIdinvoice">
+                <!-- <input type="hidden" name="useridinvoice" id="userIdinvoice"> -->
                 
                 <label for="username">Name</label>
                 <input type="text" id="username" name="username" value="{{ old('username') }}" readonly>

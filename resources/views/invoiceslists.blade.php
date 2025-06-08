@@ -129,7 +129,7 @@
             <form id="edit-invoices-form">
                 @csrf
                 <input type="hidden" name="id" id="invoiceId">
-                <!-- <input type="hidden" name="useridinvoice" id="userIdinvoice"> -->
+                <input type="hidden" name="useridinvoice" id="userIdinvoice">
                 
                 <label for="username">Name</label>
                 <input type="text" id="username" name="username" value="{{ old('username') }}" readonly>

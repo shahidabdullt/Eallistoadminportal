@@ -11,21 +11,17 @@ Route::get('/', function () {
 });
 
 
-//Route::get('/equipment', [PaymentController::class, 'equipment'])->name('equipment');
 
-// Public routes (no middleware)
-// Route::get('/login', [AuthController::class, 'loginview'])->name('login');
-Route::view('/login','login');
+
+
+ Route::get('/login', [AuthController::class, 'loginview'])->name('login');
+
 Route::post('/admindashboard', [AuthController::class, 'Authentication'])->name('dashboard');
 // web.php
 Route::get('/invoice/pay/{invoice_id}', [PaymentController::class, 'showpaymentform'])->name('invoice.pay');
 Route::post('/invoice/process-payment', [PaymentController::class, 'processPayment'])->name('invoice.process-payment');
 
-// Route::post(
-//     '/stripe/webhook',
-//     [PaymentController::class, 'handleWebhook']
-// )->name('cashier.webhook');
-// Routes that require admin authentication
+
 
 Route::middleware(['adminmiddleware'])->group(function () {
 

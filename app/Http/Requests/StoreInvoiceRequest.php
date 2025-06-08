@@ -22,19 +22,13 @@ class StoreInvoiceRequest extends FormRequest
     public function rules()
     {
         $rules=[
-            'user_id'=>['required'],
+            'useridinvoice'=>['required'],
             'date'=>['nullable','date'],
             'amount'=>['nullable','numeric'],
             'status'=>['required','in:Unpaid,Paid,Cancelled'],
         ];
         
-        if($this->isMethod('post')){
-            dd(10);
-            $rules['user_id']=['required'];
-        }
-        elseif($this->isMethod('put')){
-            $rules['username']=['required','exists:users,username'];
-        }
+      
         return $rules;
     }
 

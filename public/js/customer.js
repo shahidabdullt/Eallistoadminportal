@@ -8,7 +8,7 @@ $(document).ready(function() {
             type:'GET',
             success:function(data){
                 $('#invoiceId').val(data.id);
-                // $('#userIdinvoice').val(data.user.id);
+                 $('#userIdinvoice').val(data.user.id);
                 $('#username').val(data.user.username);
                 console.log(username);
                 $('#amount').val(data.amount);
@@ -90,7 +90,7 @@ $(document).ready(function() {
         // console.log(5);
         const formData=$('#edit-invoices-form').serialize();
         const invoceId = $('#invoiceId').val();
-        // const userId=$('#userIdinvoice').val();
+        
         if (!invoceId) {
             console.error('invoceId  is missing');
             return;
@@ -98,7 +98,7 @@ $(document).ready(function() {
         console.log(invoceId);
         // console.log('userid',userId);
         console.log(formData);
-        // formData.append('userId', userId);
+        //  formData.append('userId', userId);
         $.ajax({
             url:`/customers/invoices/${invoceId}/update`,
             type:'PUT',

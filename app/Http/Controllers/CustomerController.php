@@ -61,7 +61,7 @@ class CustomerController extends Controller
         $validatedinvoice=Validator::make($request->all(),(new StoreInvoiceRequest())->rules());
         
         $validatedinvoice=$validatedinvoice->validated();
-       
+            $validatedinvoice['user_id']=$request->input('useridinvoice');
              $invoice=Invoice::create($validatedinvoice);
            
             if ($invoice->status == 'Unpaid') {
@@ -105,11 +105,6 @@ class CustomerController extends Controller
         if(!$user){
             return response()->json(['user not found'],404);
         }
-        Log::info('Controller userid debug', [
-            'userid_parameter' => $userid,
-            'type' => gettype($userid),
-            'route_params' => request()->route()->parameters()
-        ]);
         $validated=$request->validate([
             'username'=>['required'],
             'address'=>['nullable'],
@@ -125,7 +120,7 @@ class CustomerController extends Controller
     }
 
     public function invoiceupdate(StoreInvoiceRequest $invoicerequest,$id){
-        // dd(10);
+        
         $invoice= Invoice::find($id);
         if(!$invoice){
             return response()->json(['invoice not found'],404);

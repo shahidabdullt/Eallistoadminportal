@@ -1,10 +1,12 @@
 <?php
 
 namespace Database\Seeders;
-use App\Models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
+use App\Models\User;
+
 class UserSeeder extends Seeder
 {
     /**
@@ -12,17 +14,54 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        User::create([
-            'username'=>'Adminsha',
-            'email'=>'Adminsha@gmail.com',
-            'isadmin'=>'1',
-            'password'=>Hash::make('password123')
-        ]);
-        User::create([
-            'username'=>'sha',
-            'email'=>'sha@gmail.com',
-            'isadmin'=>'0',
-            'password'=>Hash::make('password123')
-        ]);
+
+        // Only seed if no admin users exist
+        if (User::where('isadmin', '1')->count() === 0) {
+            
+            // Get credentials from environment variables
+            $adminEmail = env('ADMIN_EMAIL');
+            $adminPassword = env('ADMIN_PASSWORD');
+            
+            // Validate required environment variables
+            if (!$adminEmail || !$adminPassword) {
+                $this->command->error('ADMIN_EMAIL and ADMIN_PASSWORD must be set in .env file');
+                return;
+            }
+            
+            // Validate password strength
+            
+            
+            // Create admin user
+            User::create([
+                'username' => env('ADMIN_USERNAME', 'admin'),
+                'email' => $adminEmail,
+                'email_verified_at' => now(),
+                'isadmin' => '1',
+                'password' => Hash::make($adminPassword),
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+            
+            $this->command->info('Admin user created successfully');
+            
+            // Only create regular user if in development
+            if (app()->environment('local', 'staging')) {
+                User::create([
+                    'username' => 'testuser',
+                    'email' => 'test@example.com',
+                    'email_verified_at' => now(),
+                    'isadmin' => '0',
+                    'password' => Hash::make('SecureTestPass123!'),
+                    'created_at' => now(),
+                    'updated_at' => now(),
+                ]);
+                
+                $this->command->info('Test user created successfully');
+            }
+            
+        } else {
+            $this->command->info('Admin user already exists, skipping seeding');
+        }
+
     }
 }

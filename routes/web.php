@@ -17,7 +17,7 @@ Route::get('/login', [AuthController::class, 'loginview'])->name('login');
 Route::post('/admindashboard', [AuthController::class, 'Authentication'])->name('dashboard');
 
 // Routes that require admin authentication
-// Route::middleware(['adminmiddleware'])->group(function () {
+Route::middleware(['adminmiddleware'])->group(function () {
 
     Route::get('/admin/dashboardpage', [AuthController::class, 'admindashboard'])->name('admin');
 
@@ -36,4 +36,4 @@ Route::post('/admindashboard', [AuthController::class, 'Authentication'])->name(
     Route::put('/invoices/{invoiceId}/update', [CustomerController::class, 'invoiceupdate']);
 
     Route::post('Logout', [AuthController::class, 'Logout'])->name('Logout');
-// });
+});

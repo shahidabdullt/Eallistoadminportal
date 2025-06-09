@@ -18,11 +18,11 @@ class UserSeeder extends Seeder
         if (User::where('isadmin', '1')->count() === 0) {
             
             // Get credentials from environment variables
-            $adminEmail = env('ADMIN_EMAIL');
+            $adminemail = env('ADMIN_EMAIL');
             $adminPassword = env('ADMIN_PASSWORD');
             
             // Validate required environment variables
-            if (!$adminEmail || !$adminPassword) {
+            if (!$adminemail || !$adminPassword) {
                 $this->command->error('ADMIN_EMAIL and ADMIN_PASSWORD must be set in .env file');
                 return;
             }
@@ -33,7 +33,7 @@ class UserSeeder extends Seeder
             // Create admin user
             User::create([
                 'username' => env('ADMIN_USERNAME', 'admin'),
-                'email' => $adminEmail,
+                'email' => $adminemail,
                 'email_verified_at' => now(),
                 'isadmin' => '1',
                 'password' => Hash::make($adminPassword),

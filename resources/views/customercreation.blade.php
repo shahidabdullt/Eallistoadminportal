@@ -64,9 +64,9 @@
 <body>
     <div class="customer-creation-form">
         <h2>Create Customer</h2>
-        <form action="{{ route('customerandinvoiceregister',['type'=>'customer']) }}" method="post">
+        <form action="{{ route('customerandinvoiceregister') }}" method="post">
             @csrf
-
+            <input type="hidden" name="type" value="customer">
             <label for="name">Full Name</label>
             <input id="name" type="text" name="username" class="@error('username') is-invalid @enderror" placeholder="Enter full name" value="{{ old('username') }}" >
             @error('username')
@@ -86,7 +86,7 @@
             @enderror
 
             <label for="mobile">Mobile Number</label>
-            <input id="mobile" type="tel" name="mobile" class="@error('mobile') is-invalid @enderror" placeholder="Enter mobile number" value="{{ old('mobile') }}" pattern="[0-9]{10}" >
+            <input id="mobile" type="tel" name="mobile" class="@error('mobile') is-invalid @enderror" placeholder="Enter mobile number" value="{{ old('mobile') }}" >
             @error('mobile')
                 <div class="invalid-feedback">{{ $message }}</div>
             @enderror

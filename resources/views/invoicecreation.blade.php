@@ -64,12 +64,12 @@
 <body>
     <div class="invoice-creation-form">
         <h2>Create Invoice</h2>
-        <form action="{{ route('customerandinvoiceregister',['type'=>'invoice']) }}" method="post">
+        <form action="{{ route('customerandinvoiceregister') }}" method="post">
             @csrf
-
+            <input type="hidden" name="type" value="invoice">
             <label for="name">Customer Name</label>
-            <select name="user_id" id="name" class="@error('user_id') is-invalid @enderror" required>
-                <option value="" disabled selected>Select a customer</option>
+            <select name="useridinvoice" id="name" class="@error('user_id') is-invalid @enderror" >
+                <option value="" disabled >Select a customer</option>
                 @foreach ($users as $user)
                     <option value="{{ $user->id }}">{{ $user->username }}</option>
                 @endforeach

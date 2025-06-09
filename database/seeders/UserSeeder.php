@@ -14,6 +14,7 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
+
         // Only seed if no admin users exist
         if (User::where('isadmin', '1')->count() === 0) {
             
@@ -61,5 +62,6 @@ class UserSeeder extends Seeder
         } else {
             $this->command->info('Admin user already exists, skipping seeding');
         }
+
     }
 }

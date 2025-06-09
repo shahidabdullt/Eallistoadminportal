@@ -2,7 +2,11 @@
 
 namespace App\Providers;
 
+use App\Models\User;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
+use Laravel\Cashier\Cashier;
+use Laravel\Cashier\Subscription;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -19,6 +23,13 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        // Register the Cashier webhook controller
+        // Cashier::ignoreMigrations(); // If you want to publish and customize the migrations
+
+        // Configure currency and settings
+        Cashier::useCustomerModel(User::class);
+        Cashier::useSubscriptionModel(Subscription::class);
+
+        Paginator::useBootstrapFive();
     }
 }

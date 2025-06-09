@@ -51,6 +51,7 @@ class AuthController extends Controller
     
         // Regenerate CSRF token to avoid session fixation
         $request->session()->regenerateToken();
+        $request->session()->flush();
         return redirect('/login');
     
     }

@@ -39,9 +39,10 @@ php artisan migrate --seed
 This will set up the necessary tables and  seed a default admin user.
 Start the Development Server
 php artisan serve
+
 login credentails
-Adminsha
-password123
+sha
+12345678
 
 Visit http://localhost:8000 to access the application.
 

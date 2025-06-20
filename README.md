@@ -2,6 +2,10 @@
 
 This is a Laravel 12-based admin portal built as an assignment project for **Eallisto**. It provides basic authentication and CRUD functionality for managing **Customers** and **Invoices**. The application also supports a single API endpoint to handle both **listing** and **creation** of records based on type.
 
+login credentails
+sha
+12345678
+
 ## Features
 
 - Admin login and authentication

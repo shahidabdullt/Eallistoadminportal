@@ -45,8 +45,8 @@ Start the Development Server
 php artisan serve
 
 login credentails
-sha
-12345678
+username:sha
+password:12345678
 
 Visit http://localhost:8000 to access the application.
 

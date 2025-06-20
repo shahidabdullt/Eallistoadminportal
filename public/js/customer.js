@@ -4,17 +4,19 @@ $(document).ready(function() {
         const invoiceId = $(this).data('id');
         console.log(invoiceId)
         $.ajax({
-            url:`/invoices/${invoiceId}/edit`,
+            url:`/customers/invoices/${invoiceId}/edit`,
             type:'GET',
             success:function(data){
                 $('#invoiceId').val(data.id);
-                $('#userIdinvoice').val(data.user.id);
+                 $('#userIdinvoice').val(data.user.id);
                 $('#username').val(data.user.username);
+                console.log(username);
                 $('#amount').val(data.amount);
                 $('#status').val(data.status);
                 $('#date').val(data.date);
                 $('#edit-invoices').show();
             },
+            
             error: function() {
                 alert('Failed to fetch invoice data');
             }
@@ -41,7 +43,7 @@ $(document).ready(function() {
             // }
         // });
         $.ajax({
-            url:`/customers/${userId}/edit`,
+            url:`/customers/customers/${userId}/edit`,
             type:'GET',
             success:function(data){
                 $('#userId').val(data.id);
@@ -67,7 +69,7 @@ $(document).ready(function() {
         console.log(userId);
         console.log(formData);
         $.ajax({
-            url:`/customers/${userId}/update`,
+            url:`/customers/customers/${userId}/update`,
             type:'PUT',
             data:formData,
             // headers: {
@@ -88,17 +90,17 @@ $(document).ready(function() {
         // console.log(5);
         const formData=$('#edit-invoices-form').serialize();
         const invoceId = $('#invoiceId').val();
-        const userId=$('#userIdinvoice').val();
+        
         if (!invoceId) {
             console.error('invoceId  is missing');
             return;
         }
         console.log(invoceId);
-        console.log('userid',userId);
+        // console.log('userid',userId);
         console.log(formData);
-        // formData.append('userId', userId);
+        //  formData.append('userId', userId);
         $.ajax({
-            url:`/invoices/${invoceId}/update`,
+            url:`/customers/invoices/${invoceId}/update`,
             type:'PUT',
             data:formData,
             // headers: {
